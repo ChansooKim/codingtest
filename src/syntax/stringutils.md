@@ -3,7 +3,9 @@
 ```java
 StringBuilder answer = new StringBuilder(my_string.substring(s, e + 1);   // s부터 e까지 StringBuilder에 절사하여 담음
 
-answer.reverse();   // StringBuilder에 담긴 String 뒤집기
+// StringBuilder에 담긴 String 뒤집기
+String x = "abcde";
+String reverse = new StringBuilder(x).reverse().toString(); // "edcba
 ```
 
 ### StringTokenizer

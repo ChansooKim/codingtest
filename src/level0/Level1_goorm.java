@@ -3,6 +3,7 @@ package level0;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
@@ -272,6 +273,90 @@ public class Level1_goorm {
                 System.out.print("*");
             }
             System.out.println();
+        }
+    }
+
+
+    /**
+     * <a href="https://level.goorm.io/exam/171192/%EC%A0%88%EC%95%BD/quiz/1">절약</a>
+     */
+    public static void saving(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
+        // v는 최대 100,000 * 1,000,000 만큼 늘어날 수 있어서 Long 자료형 사용
+        long[] cArr = new long[2];
+        boolean isFail = false;
+        for(int i=0; i<N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            String c = st.nextToken();
+            long v = Long.parseLong(st.nextToken());
+
+            if("in".equals(c)) {
+                cArr[0] += v;
+            } else {
+                cArr[1] += v;
+            }
+
+            // 지출해야 할 돈이 현재 가지고 있는 돈보다 크면, 이후 수입과 상관없이 실패로 처리
+            if("out".equals(c) && cArr[0] <= v) {
+                isFail = true;
+                break;
+            }
+        }
+
+        if(cArr[0] - cArr[1] >= 0) {
+            System.out.println("success");
+        } else if(isFail) {
+            System.out.println("fail");
+        } else {
+            System.out.println("fail");
+        }
+    }
+
+
+    /**
+     * <a href="https://level.goorm.io/exam/47883/%EB%8B%A8%EC%96%B4%EC%9D%98-%EA%B0%9C%EC%88%98-%EC%84%B8%EA%B8%B0/quiz/1">단어의 개수 세기</a>
+     */
+    public static void countingWords(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String input = br.readLine();
+
+        input = input.trim();	// 앞 뒤 공백제거
+        if(input.isEmpty()) {
+            System.out.println(0);
+        } else {
+            // 한 개 이상의 공백을 한 개의 공백으로 변경
+            input = input.replaceAll("\\s+", " ");
+
+            String[] arr = input.split(" ");
+            System.out.println(arr.length);
+        }
+    }
+
+
+    /**
+     * <a href="https://level.goorm.io/exam/242429/%EA%BD%83-%EC%84%A0%EB%AC%BC%ED%95%98%EA%B8%B0/quiz/1">꽃 선물하기</a>
+     */
+    public static void giftFlowers(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());	// 선물할 사람
+
+        String[] output = new String[N];
+        for(int i=0; i<N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+
+            if(a < b) output[i] = "Sunflower";
+            else if(a == b) output[i] = "Tulip";
+            else output[i] = "Rose";
+        }
+
+        for(String print : output) {
+            System.out.println(print);
         }
     }
 
