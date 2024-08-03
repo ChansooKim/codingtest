@@ -48,6 +48,16 @@ str.substring(e + 1);  // e부터 끝까지 절사
 str.charAt(i);    // 인덱스에 해당하는 char 값을 반환
 ```
 
+##### 공백제거
+```java
+Stirng str = " Hi ";
+str.trim();     // Hi (앞 뒤 공백제거)
+
+String str = "H   i";
+str.replaceAll("\\s", "");  // Hi (중간 공백제거)
+```
+
+
 #### String to List
 ```java
 String my_string = "CodingTest";
