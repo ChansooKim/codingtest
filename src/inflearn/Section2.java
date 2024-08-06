@@ -61,6 +61,106 @@ public class Section2 {
 
 
     /**
+     * 2. 보이는 학생
+     */
+    public static void question2_2Solve(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        StringTokenizer st = new StringTokenizer(sc.nextLine());
+        int count = 0;
+        int frontStudent = Integer.MIN_VALUE;
+        for(int i=0; i<n; i++) {
+            int height = Integer.parseInt(st.nextToken());
+            if(frontStudent < height) {
+                frontStudent = height;
+                count++;
+            }
+        }
+        System.out.println(count);
+    }
+
+
+    public static void question2_2Answer(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i=0; i<n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        int answer = 1, max = arr[0];
+        for(int i=1; i<n; i++) {
+            if(arr[i] > max) {
+                answer++;
+                max = arr[i];
+            }
+        }
+        System.out.println(answer);
+    }
+
+
+    /**
+     * 3. 가위바위보
+     */
+    public static void question2_3Solve(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] aArr = new int[n];
+        int[] bArr = new int[n];
+        for(int i=0; i<n; i++) {
+            aArr[i] = sc.nextInt();
+        }
+        for(int i=0; i<n; i++) {
+            bArr[i] = sc.nextInt();
+        }
+        // 1:가위, 2:바위, 3:보
+        for(int i=0; i<n; i++) {
+            int a = aArr[i];
+            int b = bArr[i];
+            if(a == 1) {
+                if(b == 2) System.out.println("B");
+                else if(b == 3) System.out.println("A");
+                else System.out.println("D");
+            } else if(a == 2) {
+                if(b == 1) System.out.println("A");
+                else if(b == 2) System.out.println("D");
+                else System.out.println("B");
+            } else if(a == 3){
+                if(b == 1) System.out.println("B");
+                else if(b == 2) System.out.println("A");
+                else System.out.println("D");
+            }
+        }
+    }
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        int[] b = new int[n];
+        for(int i=0; i<n; i++) {
+            a[i] = sc.nextInt();
+        }
+        for(int i=0; i<n; i++) {
+            b[i] = sc.nextInt();
+        }
+
+        String answer = "";
+        for(int i=0; i<n; i++) {
+            if(a[i] == b[i]) answer+="D";
+            else if(a[i]==1 && b[i]==3) answer+="A";
+            else if(a[i]==2 && b[i]==1) answer+="A";
+            else if(a[i]==3 && b[i]==2) answer+="A";
+            else answer+="B";
+        }
+        for(char x : answer.toCharArray()) {
+            System.out.println(x);
+        }
+    }
+
+
+    /**
      * 4. 피보나치 수열 (배열 ver) [속도 상 for문 배열이 성능이 더 좋다]
      * TODO 다시 풀어보기
      *  피보나치 수열 : 앞의 2개의 수를 합하여 다음 숫자가 되는 수열
