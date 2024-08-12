@@ -134,7 +134,7 @@ public class Section2 {
     }
 
 
-    public static void main(String[] args) {
+    public static void question2_3Answer(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int[] a = new int[n];
@@ -292,6 +292,143 @@ public class Section2 {
 
 
     /**
+     * 6. 뒤집은 소수
+     */
+    public static void question2_6Solve(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i=0; i<n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        for(int i=0; i<n; i++) {
+            String a = String.valueOf(arr[i]);
+            StringBuilder b = new StringBuilder(a);
+            b.reverse();
+
+            int c = Integer.parseInt(b.toString());
+            if(isPrime(c)) {
+                System.out.print(c+" ");
+            }
+        }
+    }
+
+
+    public static boolean isPrime(int num) {
+        if(num == 1) return false;
+        else {
+            for(int i=2; i<num; i++) {
+                if(num%i==0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    public static void question2_6Answer(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i=0; i<n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        ArrayList<Integer> answer = new ArrayList<>();
+        for(int i=0; i<n; i++) {
+            int tmp = arr[i];
+            int res = 0;
+            while(tmp > 0) {
+                // 숫자 뒤집기
+                int t = tmp % 10;
+                res = res * 10 + t;
+                tmp = tmp / 10;
+
+                /*res = res * 10 + t
+                t = tmp % 10     (나머지)
+                tmp = tmp / 10   (몫)*/
+            }
+            if(isPrime(res)) {
+                answer.add(res);
+            }
+        }
+
+        for(int x : answer) {
+            System.out.print(x+" ");
+        }
+    }
+
+
+    /**
+     * 소수 판별함수
+     * @param num
+     * @return
+     */
+    /*public static boolean isPrime(int num) {
+        if(num==1) return false;
+        for(int i=2; i<num; i++) {
+            if(num%i == 0) return false;
+        }
+        return true;
+    }*/
+
+
+    /**
+     * 7. 점수계산
+     */
+    public static void question2_7Solve(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i=0; i<n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        int answer = arr[0];
+        int contScore = arr[0];     // 가산점을 담는 변수
+        boolean isContinue = arr[0] == 1;
+        for(int i=1; i<n; i++) {
+            if(isContinue && arr[i]==1) {
+                contScore++;
+                answer += contScore;
+            } else if(arr[i]==1) {
+                contScore++;
+                answer += contScore;
+                isContinue = true;
+            } else {
+                isContinue = false;
+                contScore = 0;
+            }
+//            System.out.println("i: "+i+", answer: "+answer);
+        }
+        System.out.println(answer);
+    }
+
+
+    public static void question2_7Answer(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i=0; i<n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        int answer = 0, cnt = 0;
+        for(int i=0; i<n; i++) {
+            if(arr[i]==1) {
+                cnt++;
+                answer += cnt;
+            } else {
+                cnt = 0;
+            }
+        }
+        System.out.println(answer);
+    }
+
+
+    /**
      * 8. 등수구하기
      * TODO 다시 풀어보기
      */
@@ -439,5 +576,62 @@ public class Section2 {
     }
 
 
+    /**
+     * 10. 봉우리
+     * TODO 다시 풀어보기
+     */
+    /*public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] arr = new int[n][n];
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<n; j++) {
+                arr[i][j] = sc.nextInt();
+            }
+        }
+
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<n; j++) {
+                if(arr[i][j] < arr[i][j+1]) {
+                    if(arr[])
+                }
+            }
+        }
+    }*/
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] arr = new int[n][n];
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<n; j++) {
+                arr[i][j] = sc.nextInt();
+            }
+        }
+
+        int[] dx = {-1, 0, 1, 0};   // 지점 arr[i][j] 기준, 상하좌우를 사용하기 위한 배열
+        int[] dy = {0, 1, 0, -1};
+
+        int answer = 0;
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<n; j++) {
+                // 격자에서 4 방향으로 봉우리 여부 판단
+                boolean flag = true;
+                for(int k=0; k<4; k++) {
+                    int nx = i+dx[k];
+                    int ny = j+dy[k];
+
+                    // 봉우리가 아닌 경우
+                    if(nx>=0 && nx<n && ny>=0 && ny<n && arr[nx][ny] >= arr[i][j]) { // indexOutOfBound 에러 방지 (테두리는 0으로 친다)
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag) answer++;
+            }
+        }
+        System.out.println(answer);
+    }
 
 }
