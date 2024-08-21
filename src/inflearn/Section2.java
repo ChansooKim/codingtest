@@ -600,7 +600,7 @@ public class Section2 {
     }*/
 
 
-    public static void main(String[] args) {
+    public static void question2_10Answer(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int[][] arr = new int[n][n];
@@ -629,6 +629,134 @@ public class Section2 {
                     }
                 }
                 if(flag) answer++;
+            }
+        }
+        System.out.println(answer);
+    }
+
+
+    /**
+     * 11. 임시반장 정하기 (3중 for문)
+     * TODO 다시 풀어보기
+     */
+    public static void question2_11Solve(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] arr = new int[n][5];
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<n; j++) {
+                arr[i][j] = sc.nextInt();
+            }
+        }
+
+        int max = 0;
+        int studentNum = 0;
+        for(int i=0; i<n; i++) {
+            int cnt = 0;
+            for(int j=0; j<n; j++) {
+                for(int k=0; k<5; k++) {
+                    if(arr[i][k] == arr[j][k]) {
+                        cnt++;
+                        break;
+                    }
+                }
+            }
+            if(cnt > max) {
+                max = cnt;
+                studentNum = n+1;
+            }
+        }
+        System.out.println(studentNum);
+    }
+
+
+    public static void question2_11Answer(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] arr = new int[n+1][6];  // 1번부터 사용하기 때문에 n+1, 5학년까지 있으니까 6으로 잡음
+        for(int i=1; i<=n; i++) {
+            for(int j=1; j<=5; j++) {
+                arr[i][j] = sc.nextInt();
+            }
+        }
+
+        int answer = 0;
+        int max = Integer.MIN_VALUE;
+        for(int i=1; i<=n; i++) {
+            int cnt = 0;
+            for(int j=1; j<=n; j++) {
+                for(int k=1; k<=5; k++) {
+                    if(arr[i][k] == arr[j][k]) {
+                        cnt++;
+                        break;
+                    }
+                }
+            }
+            if(cnt > max) {
+                max = cnt;
+                answer = i;
+            }
+        }
+        System.out.println(answer);
+    }
+
+
+    /**
+     * 12. 멘토링 (4중 for문)
+     * TODO 다시 풀어보기
+     */
+    public static void question2_12Solve(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();   // 반 학생수
+        int m = sc.nextInt();
+        int[][] arr = new int[m][n];
+        for(int i=0; i<m; i++) {
+            for(int j=0; j<n; j++) {
+                arr[i][j] = sc.nextInt();
+            }
+        }
+
+        int answer = 0;
+        for(int i=0; i<m; i++) {
+            int cnt = 0;
+            int max = Integer.MIN_VALUE;    // 해당 줄에서의 최대 값
+            for(int j=0; j<n; j++) {
+                // arr[0][0]
+//                int x = arr[i][j];  // arr[0][0]-> 1번
+//                arr[i][j]
+            }
+        }
+    }
+
+
+    public static void question2_12Answer(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();   // 반 학생수
+        int m = sc.nextInt();
+        int[][] arr = new int[m][n];
+        for(int i=0; i<m; i++) {
+            for(int j=0; j<n; j++) {
+                arr[i][j] = sc.nextInt();
+            }
+        }
+
+        int answer = 0;
+        for(int i=1; i<=n; i++) {
+            // 각 열에서의 비교를 위한 2중 for문 (i, j)
+            for(int j=1; j<=n; j++) {
+                int cnt = 0;
+                for(int k=0; k<m; k++) {
+                    int pi=0, pj=0;     // pi: 멘토, pj: 멘티
+                    for(int s=0; s<n; s++) {
+                        if(arr[k][s] == i) pi=s;
+                        if(arr[k][s] == j) pj=s;
+                    }
+                    if(pi < pj) cnt++;
+                }
+                if(cnt == m) {
+                    // m개의 테스트에서 짝꿍이 될 수 있는 경우의 수
+                    answer++;
+                }
             }
         }
         System.out.println(answer);

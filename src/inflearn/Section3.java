@@ -240,6 +240,68 @@ public class Section3 {
 
 
     /**
+     * 4. 연속 부분 수열
+     * TODO 다시 풀어보기
+     */
+    public static void question3_4Solve(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i=0; i<n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        int answer = 0;
+        for(int i=0; i<n; i++) {
+            int sum = 0;
+            for(int j=i; j<n; j++) {    // 첫번째
+                if(sum < m) {
+                    sum += arr[j];
+                } else if(sum == m) {
+                    answer++;
+                    break;
+                } else {
+                    break;
+                }
+            }
+        }
+        System.out.println(answer);
+    }
+
+
+    /**
+     * 투 포인터 사용
+     */
+    public static void question3_4Answer(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i=0; i<n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        // POINT 2중 for문을 사용해도 되지만, O(n^2)으로 횟수가 늘어나면 오래걸리기때문에 투 포인터를 사용한다
+        int answer = 0;
+        int sum = 0;
+        int lt = 0;
+        for(int rt=0; rt<n; rt++) {
+            sum += arr[rt];
+            if(sum == m) {
+                answer++;
+            }
+            while(sum >= m) {
+                sum -= arr[lt++];   // sum에서 lt값을 빼고, lt값은 1 증가
+                if(sum == m) {
+                    answer++;
+                }
+            }
+        }
+        System.out.println(answer);
+    }
+
+
+    /**
      * 5. 연속된 자연수의 합(two pointers)
      * // TODO 다시 풀어보기
      */
