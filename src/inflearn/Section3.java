@@ -366,4 +366,88 @@ public class Section3 {
         }
         System.out.println(answer);
     }
+
+
+    /**
+     * 5-1. 연속된 자연수의 합 (수학)
+     * 5번 문제에 대한 수학적 풀이
+     */
+    public static void question3_5Answer2(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int answer = 0;
+        int cnt = 1;
+
+        n--;
+        while(n>0) {
+            cnt++;
+            n = n-cnt;
+            if(n % cnt == 0) {  // 연속된 자연수가 가능한 경우
+                answer++;
+            }
+        }
+        System.out.println(answer);
+    }
+
+
+    /**
+     * 6. 최대 길이 연속부분수열
+     */
+    public static void question3_6Solve(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        int answer = 0;
+        int cnt = 0;    // 0을 1로 바꾼 횟수 (k값을 넘어가면 안됨)
+        int lt = 0, rt = 0;
+        int continueCnt = 0;
+        while (cnt < k) {
+            continueCnt = 0;
+            for (int i = lt; i < arr.length; i++) {
+                if (arr[i] == 0) {
+                    cnt++;
+                } else {
+                    continueCnt++;
+                }
+
+                if(cnt == k) lt++;
+            }
+        }
+
+        answer = Math.max(answer, continueCnt);
+        System.out.println(answer);
+    }
+
+
+    public static void question3_6Answer(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i=0; i<n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        int answer = 0, cnt = 0, lt=0;
+        for(int rt = 0; rt<n; rt++) {
+            if(arr[rt] == 0) {
+                cnt++;
+            }
+
+            while(cnt > k) {
+                if(arr[lt] == 0) {
+                    cnt--;
+                }
+                lt++;
+            }
+            answer = Math.max(answer, rt-lt+1);
+        }
+        System.out.println(answer);
+    }
+
 }
