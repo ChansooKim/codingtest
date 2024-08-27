@@ -169,7 +169,7 @@ public class Section4 {
     }
 
 
-    public static void main(String[] args) {
+    public static void question4_3Answer(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int k = sc.nextInt();
@@ -198,6 +198,72 @@ public class Section4 {
         for(int x : answer) {
             System.out.print(x+" ");
         }
+    }
+
+
+    /**
+     * 4. 모든 아나그램 찾기(Hash, Sliding Window(O(n)))
+     */
+    public static void question4_4Solve(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        String c = sc.next();
+        int answer = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        for(char x : c.toCharArray()) {
+            map.put(x, map.getOrDefault(map.get(x), 0)+1);
+        }
+
+        char[] arr = s.toCharArray();
+        int lt = 0;
+        while(lt < s.length()-c.length()+1) {
+            String str = "";
+            for(int i=lt; i<lt+c.length(); i++) {
+                str += arr[i];
+            }
+
+            Map<Character, Integer> newMap = new HashMap<>();
+            for(char x : str.toCharArray()) {
+                newMap.put(x, newMap.getOrDefault(newMap.get(x), 0)+1);
+            }
+
+            if(map.equals(newMap)) {
+                answer++;
+            }
+            lt++;
+        }
+        System.out.println(answer);
+    }
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String a = sc.next();
+        String b = sc.next();
+
+        int answer = 0;
+        HashMap<Character, Integer> am = new HashMap<>();
+        HashMap<Character, Integer> bm = new HashMap<>();
+        for(char x : b.toCharArray()) {
+            bm.put(x, bm.getOrDefault(x, 0)+1);
+        }
+        int L = b.length()-1;
+        for(int i=0; i<L; i++) {
+            am.put(a.charAt(i), am.getOrDefault(a.charAt(i), 0)+1);
+        }
+        int lt = 0;
+        for(int rt=L; rt<a.length(); rt++) {
+            am.put(a.charAt(rt), am.getOrDefault(a.charAt(rt), 0)+1);
+            if(am.equals(bm)) {
+                answer++;
+            }
+            am.put(a.charAt(lt), am.get(a.charAt(lt))-1);
+            if(am.get(a.charAt(lt)) == 0) {
+                am.remove(a.charAt(lt));
+            }
+            lt++;
+        }
+        System.out.println(answer);
     }
 
 }

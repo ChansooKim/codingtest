@@ -73,6 +73,52 @@ public class Section5 {
 
 
     /**
+     * 2. 괄호문자제거
+     */
+    public static void question5_2Solve(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        Stack<Character> stack = new Stack<>();
+        String answer = "";
+        for(int i=0; i<s.length(); i++) {
+            if(s.charAt(i) == ')') {
+                stack.push(s.charAt(i));
+                while(stack.pop() != '(') {
+                    // POINT stack.pop()은 최상단의 stack을 제거하면서 출력한다
+                }
+            } else {
+                stack.push(s.charAt(i));
+            }
+        }
+        for(char x : stack) {
+            answer += x;
+        }
+        System.out.println(answer);
+    }
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+
+        String answer = "";
+        Stack<Character> stack = new Stack<>();
+        for(char x : str.toCharArray()) {
+            if(x == ')') {
+                // Stack에 담긴 값이 '('일 때 까지
+                while(stack.pop() != '(');
+            } else {
+                stack.push(x);
+            }
+        }
+        for(int i=0; i<stack.size(); i++) {
+            answer += stack.get(i);
+        }
+        System.out.println(answer);
+    }
+
+
+    /**
      * 6. 공주구하기(Queue)
      * TODO 다시 풀어보기
      */
