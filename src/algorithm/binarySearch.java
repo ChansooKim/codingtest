@@ -2,7 +2,7 @@ package algorithm;
 
 /**
  * packageName    : algorithm
- * fileName       : binarySearch
+ * fileName       : BinarySearch
  * author         : KimChansoo
  * date           : 24. 8. 2.
  * description    : 이진탐색 알고리즘
@@ -12,7 +12,7 @@ package algorithm;
  * -----------------------------------------------------------
  * 24. 8. 2.       KimChansoo       최초 생성
  */
-public class binarySearch {
+public class BinarySearch {
 
     public static void main(String[] args) {
         // 91번 책 찾기

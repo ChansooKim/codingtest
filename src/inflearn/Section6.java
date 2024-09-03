@@ -113,9 +113,35 @@ public class Section6 {
             int tmp = arr[i];
             int j;
             // 11 7 5 6 10 9
-            for(j=i-1; j>=0; j--) {     // tmp=7, arr[j]=11, arr[j+1]=7
+            for(j=i-1; j>=0; j--) {     // case j=0, tmp=7, arr[j]=11, arr[j+1]=7
+                if(arr[j] > tmp) {      // arr[1] = arr[0],
+                    arr[j+1] = arr[j];  // 7 자리에 11 삽입, 반복문 종료 후 j--되어 j=-1, arr[j+1]=arr[0]=7
+                } else {                // case j=1, tmp=5, 5자리에 11삽입
+                    break;              // 이 시점이 tmp가 들어갈 위치
+                }
+            }
+            arr[j+1] = tmp;
+        }
+
+        for(int x : arr) {
+            System.out.print(x+" ");
+        }
+    }
+
+
+    public static void question6_3Solve2(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i=0; i<n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        for(int i=1; i<n; i++) {
+            int tmp = arr[i], j;
+            for(j=i-1; j>=0; j--) {
                 if(arr[j] > tmp) {
-                    arr[j+1] = arr[j];  // 7 자리에 11 삽입, 반복문 종료 후 j--되어 j=0, arr[j+1]=arr[1]=7
+                    arr[j+1] = arr[j];
                 } else {
                     break;
                 }
