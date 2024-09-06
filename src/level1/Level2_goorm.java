@@ -168,4 +168,60 @@ public class Level2_goorm {
         System.out.println(N - maxAnts);
     }
 
+
+    /**
+     * <a href="https://level.goorm.io/exam/47880/%EB%B6%80%EB%B6%84-%ED%8C%B0%EB%A6%B0%EB%93%9C%EB%A1%AC-%EB%AC%B8%EC%9E%90%EC%97%B4/quiz/1">부분 팰린드롬 문자열</a>
+     */
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String input = br.readLine();
+        int len = input.length();
+
+        int answer = 0;
+        // POINT 모든 케이스를 검사하기 위해 2중 for문을 사용해아함
+        for(int i=0; i<len; i++) {
+            for(int j=i+1; j<=len; j++) {
+                String word = input.substring(i, j);
+                char[] chArr = word.toCharArray();
+                int lt = 0;
+                int rt = word.length() - 1;
+
+                boolean isPalindrom = true;
+                while(lt < rt && isPalindrom) {
+                    if(chArr[lt] == chArr[rt]) {
+                        lt++;
+                        rt--;
+                    } else {
+                        isPalindrom = false;
+                    }
+                }
+                if(isPalindrom) {
+                    answer = Math.max(answer, word.length());
+                }
+            }
+        }
+
+        System.out.println(answer);
+    }
+    // 실패코드 (0에서 문자끝까지 1개씩 줄여가며 반복함)
+    /*for(int i=len; i>0; i--) {
+        String word = input.substring(0, i);
+        char[] chArr = word.toCharArray();
+        int lt = 0;
+        int rt = word.length() - 1;
+
+        boolean isPalindrom = true;
+        while(lt < rt && isPalindrom) {
+            if(chArr[lt] == chArr[rt]) {
+                lt++;
+                rt--;
+            } else {
+                isPalindrom = false;
+            }
+        }
+        if(isPalindrom) {
+            answer = Math.max(answer, word.length());
+        }
+    }*/
+
 }
