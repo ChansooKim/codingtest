@@ -1,11 +1,8 @@
-package level1;
+package goorm;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -172,7 +169,7 @@ public class Level2_goorm {
     /**
      * <a href="https://level.goorm.io/exam/47880/%EB%B6%80%EB%B6%84-%ED%8C%B0%EB%A6%B0%EB%93%9C%EB%A1%AC-%EB%AC%B8%EC%9E%90%EC%97%B4/quiz/1">부분 팰린드롬 문자열</a>
      */
-    public static void main(String[] args) throws Exception {
+    public static void partialPalindromicString(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String input = br.readLine();
         int len = input.length();
@@ -223,5 +220,114 @@ public class Level2_goorm {
             answer = Math.max(answer, word.length());
         }
     }*/
+
+
+    /*public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        // 첫 번째 줄 입력: 수열 길이 N과 회전 횟수 M
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+
+        // 두 번째 줄 입력: 수열
+        st = new StringTokenizer(br.readLine());
+        if(n == 1) {
+            System.out.println(st.nextToken());
+            return;
+        }
+
+        LinkedList<Integer> q = new LinkedList<>();
+        for(int i=0; i<n; i++) {
+            q.add(Integer.valueOf(st.nextToken()));
+        }
+
+        int curIndex = 0;
+        for(int i=0; i<m; i++) {
+            int d = q.get(curIndex);
+            curIndex = (curIndex + d)%n;    // d만큼 왼쪽으로 이동, 수열의 길이 기준
+        }
+
+        System.out.println(q.get(curIndex));
+    }*/
+
+    /*public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        // 첫 번째 줄 입력: 수열 길이 N과 회전 횟수 M
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+
+        // 두 번째 줄 입력: 수열
+        st = new StringTokenizer(br.readLine());
+        LinkedList<Integer> q = new LinkedList<>();
+        for (int i = 0; i < n; i++) {
+            q.add(Integer.parseInt(st.nextToken()));
+        }
+
+        // M번 회전 수행
+        for (int i = 0; i < m; i++) {
+            int d = q.get(0); // 첫 번째 값을 얻음
+            rotateLeft(q, d); // d만큼 왼쪽으로 회전
+        }
+
+        // 결과 출력 (회전 후 첫 번째 값)
+        System.out.println(q.get(0));
+    }
+
+    // 왼쪽으로 d칸 회전하는 함수
+    private static void rotateLeft(LinkedList<Integer> list, int d) {
+        // d만큼 리스트를 왼쪽으로 회전
+        for (int i = 0; i < d; i++) {
+            int first = list.removeFirst();  // 첫 번째 값을 제거하고
+            list.addLast(first);             // 그 값을 마지막에 추가
+        }
+    }*/
+
+
+    /**
+     * <a href="https://level.goorm.io/exam/244404/%ED%9A%8C%EC%A0%84-%EB%B0%B0%EC%97%B4/quiz/1">회전배열</a>
+     */
+    public static void rotationArrangement(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine()," ");
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+        int[]arr = new int[n];
+        st = new StringTokenizer(br.readLine()," ");
+        for(int i=0;i<n;i++)arr[i] = Integer.parseInt(st.nextToken());
+        int value = arr[0];
+        int idx = 0;
+        while(m-->0){
+            idx += value;
+            idx %= n;
+            value = arr[idx];
+        }
+        System.out.println(value);
+    }
+
+
+    /**
+     * <a href="https://level.goorm.io/exam/173337/8%EC%A7%84%EC%88%98-%EA%B3%84%EC%82%B0%EA%B8%B0/quiz/1">8진수 계산기</a>
+     */
+    public static void octalCalculator(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String input = br.readLine();
+
+        int n = Integer.parseInt(input);
+        int[] arr = new int[n];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for(int i=0; i<n; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        int sum = 0;
+        for(int i=0; i<n; i++) {
+            sum += arr[i];
+        }
+
+        System.out.println(Integer.toOctalString(sum));
+    }
 
 }
