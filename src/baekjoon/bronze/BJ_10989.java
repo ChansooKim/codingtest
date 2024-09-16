@@ -2,7 +2,7 @@ package baekjoon.bronze;
 
 import java.io.IOException;
 
-public class BJ10989 {
+public class BJ_10989 {
     public static void main(String[] args) throws IOException {
         int N = 0;
         int in = System.in.read();
