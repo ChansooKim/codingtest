@@ -1,6 +1,7 @@
 package inflearn;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -205,13 +206,37 @@ public class Section7 {
             DFS6(L+1);  // 오른쪽
         }
     }
-    public static void main(String[] args) {
+    public static void question7_6Answer(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         // POINT 원소가 n개인 집합의 부분집합의 갯수는 2^n
 
         ch = new int[n+1];
         DFS6(1);
+    }
+
+
+    /**
+     * 7. 이진트리 레벨탐색 (BFS: Breadth-First-Search)
+     */
+    static boolean[] isVisited = new boolean[8];
+    static int[][] graphs =  { {}, {2,3}, {1,4,5}, {1,6,7}, {2}, {2}, {3}, {7} };
+
+    public static void main(String[] args) {
+        dfs7(1);
+    }
+
+    static void dfs7(int idx) {
+        isVisited[idx] = true;
+        System.out.print(idx+" ");
+        for(int i=1; i<graphs.length; i++) {
+            int[] nodes = graphs[i];
+            for(int node : nodes) {
+                if(!isVisited[node]) {
+                    dfs7(node);
+                }
+            }
+        }
     }
 
 
